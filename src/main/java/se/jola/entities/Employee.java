@@ -1,9 +1,11 @@
 package se.jola.entities;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,11 +25,13 @@ public class Employee {
     @Column(nullable = false)
     private String employeeNumber;
     
-    @Column
+    @ManyToOne
     private Department department;
     
-    @Column
+    @Embedded
     private ParkingSpace parkingSpace;
+    
+    
     
     protected Employee(){}
     
@@ -64,4 +68,17 @@ public class Employee {
 	
 	return this;
     }
+    
+    public Employee setParkingSpace(ParkingSpace parkingSpace) {
+	this.parkingSpace = parkingSpace;
+	
+	return this;
+    }
+    
+    public Employee setDepartment(Department department){
+	this.department = department;
+	
+	return this;
+    }
+
 }

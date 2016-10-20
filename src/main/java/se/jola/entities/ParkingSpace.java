@@ -1,18 +1,13 @@
 package se.jola.entities;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Embeddable;
 
-@Entity
-@Table(name = "parkingSpace")
+@Embeddable
 public class ParkingSpace {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+    @Column(unique = true)
+    private Long parkingSpaceId;
 
     @Column
     private String label;
@@ -20,8 +15,9 @@ public class ParkingSpace {
     protected ParkingSpace() {
     }
 
-    public ParkingSpace(String lablel) {
+    public ParkingSpace(String label, Long id) {
 	this.label = label;
+	this.parkingSpaceId = id;
     }
 
     public String getLabel() {
@@ -29,11 +25,17 @@ public class ParkingSpace {
     }
 
     public Long getId() {
-	return id;
+	return parkingSpaceId;
     }
     
     public ParkingSpace setLabel(String label) {
 	this.label = label;
+	
+	return this;
+    }
+    
+    public ParkingSpace setId(Long id) {
+	this.parkingSpaceId = id;
 	
 	return this;
     }

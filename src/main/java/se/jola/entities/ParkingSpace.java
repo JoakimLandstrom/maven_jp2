@@ -1,10 +1,16 @@
 package se.jola.entities;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
-@Embeddable
+@Entity
 public class ParkingSpace {
+    
+    @Id
+    @GeneratedValue
+    private Long id;
 
     @Column(unique = true)
     private Long parkingSpaceId;

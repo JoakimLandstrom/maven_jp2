@@ -1,11 +1,12 @@
 package se.jola.entities;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,57 +29,39 @@ public class Employee {
     @ManyToOne
     private Department department;
     
-    @Embedded
+    @OneToOne
+    @JoinColumn(unique = true)
     private ParkingSpace parkingSpace;
-    
-    
     
     protected Employee(){}
     
-    public Employee(String firstName, String lastName, String employeeNumber) {
+    public Employee(String firstName, String lastName, String employeeNumber, ParkingSpace parkingSpace, Department department) {
 	this.firstName = firstName;
 	this.lastName = lastName;
 	this.employeeNumber = employeeNumber;
-    }
-    
-    public String getFirstName() {
-	return firstName;
-    }
-    
-    public String getLastName() {
-	return lastName;
-    }
-    
-    public String getEmployeeNumber() {
-	return employeeNumber;
-    }
-    
-    public Long getId() {
-	return id;
-    }
-    
-    public Employee setFirstName(String firstName) {
-	this.firstName = firstName;
-	
-	return this;
-    }
-    
-    public Employee setLastName(String lastName) {
-	this.lastName = lastName;
-	
-	return this;
-    }
-    
-    public Employee setParkingSpace(ParkingSpace parkingSpace) {
 	this.parkingSpace = parkingSpace;
-	
-	return this;
-    }
-    
-    public Employee setDepartment(Department department){
 	this.department = department;
-	
-	return this;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmployeeNumber() {
+        return employeeNumber;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public ParkingSpace getParkingSpace() {
+        return parkingSpace;
+    }
+    
+    
 }

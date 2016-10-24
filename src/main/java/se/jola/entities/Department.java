@@ -4,10 +4,9 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Department {
@@ -19,7 +18,7 @@ public class Department {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "department", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "departments")
     private Collection<Employee> employees;
 
     protected Department() {

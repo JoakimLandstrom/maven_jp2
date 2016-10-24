@@ -1,11 +1,13 @@
 package se.jola.entities;
 
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -26,8 +28,8 @@ public class Employee {
     @Column(nullable = false)
     private String employeeNumber;
     
-    @ManyToOne
-    private Department department;
+    @ManyToMany
+    private Collection<Department> departments;
     
     @OneToOne
     @JoinColumn(unique = true)
@@ -35,12 +37,12 @@ public class Employee {
     
     protected Employee(){}
     
-    public Employee(String firstName, String lastName, String employeeNumber, ParkingSpace parkingSpace, Department department) {
+    public Employee(String firstName, String lastName, String employeeNumber, ParkingSpace parkingSpace, Collection<Department> departments) {
 	this.firstName = firstName;
 	this.lastName = lastName;
 	this.employeeNumber = employeeNumber;
 	this.parkingSpace = parkingSpace;
-	this.department = department;
+	this.departments = departments;
     }
 
     public String getFirstName() {
@@ -55,13 +57,16 @@ public class Employee {
         return employeeNumber;
     }
 
-    public Department getDepartment() {
-        return department;
+    public Collection<Department> getDepartments() {
+        return departments;
     }
 
     public ParkingSpace getParkingSpace() {
         return parkingSpace;
     }
     
-    
+    public Employee addDepartment(Department department){
+	departments.add(department);
+	return this;
+    }
 }
